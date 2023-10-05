@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: 'main']],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'Mounisha-credentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']],
+                        userRemoteConfigs: [[url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins']]
+                    ])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Your build steps here
+            }
+        }
+
+        stage('Create Docker Images') {
+            steps {
+                // Your Docker image creation steps here
+            }
+        }
+    }
+}
