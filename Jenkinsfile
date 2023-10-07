@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment {
+        AWS_ACCESS_KEY_ID = 'AKIARGWR6CGSTJVCA2QY'
+        AWS_SECRET_ACCESS_KEY = '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'
+    }
     tools {
         git 'Default'
     }
@@ -16,9 +19,9 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [], 
                     credentialsId: 'AWS',
-
                     userRemoteConfigs: [[url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins']]
-                    
+                    sh 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
+                    sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'                    
             ])
         
         }
