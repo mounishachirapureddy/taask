@@ -7,6 +7,7 @@ pipeline {
     tools {
         git 'Default'
     }
+stages{    
 stage('Checkout1') {
     steps {
         script {
