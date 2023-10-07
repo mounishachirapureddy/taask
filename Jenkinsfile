@@ -19,9 +19,10 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [], 
                     credentialsId: 'AWS',
-                    userRemoteConfigs: [[url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins']]
+                    def gitUrl = 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins'
                     sh 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
-                    sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'                    
+                    sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'   
+                    sh 'git clone ${gitUrl}'
             ])
         
         }
