@@ -7,27 +7,27 @@ pipeline {
     tools {
         git 'Default'
     }
-
-    stages {
-    
-        stage('Checkout1') {
-        // Checkout code from the 'main' branch
-            steps{
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: 'main']], 
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    credentialsId: 'AWS',
-                    def gitUrl = 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins'
-                    sh 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
-                    sh 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}'   
-                    sh 'git clone ${gitUrl}'
+stage('Checkout1') {
+    steps {
+        script {
+            def gitUrl = 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins'
+            
+            // Set AWS credentials using environment variables
+            env.AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+            env.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
+            
+            // Checkout the Git repository
+            checkout([$class: 'GitSCM', 
+                      branches: [[name: 'main']], 
+                      doGenerateSubmoduleConfigurations: false, 
+                      extensions: [[$class: 'GitSCMExtension', userRemoteConfigs: [[url: gitUrl]]]], 
+                      userRemoteConfigs: [[url: gitUrl, credentialsId: 'AWS']]
             ])
-        
         }
     }
-        
+}
+
+    
     
     
         /*
@@ -96,5 +96,4 @@ pipeline {
 
         }
         */
-    }
-}
+    
