@@ -26,7 +26,7 @@ stage('Checkout1') {
         }
     }
 }
-
+}
     
     
     
