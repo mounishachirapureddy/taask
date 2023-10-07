@@ -16,8 +16,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [], 
                     credentialsId: 'AWS',
-                    aws configure set aws_access_key_id AKIARGWR6CGSTJVCA2QY
-                    aws configure set aws_secret_access_key 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
+
                     userRemoteConfigs: [[url: 'https://git-codecommit.ap-south-1.amazonaws.com/v1/repos/Snapcoins']]
                     
             ])
